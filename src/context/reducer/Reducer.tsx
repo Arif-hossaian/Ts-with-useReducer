@@ -60,7 +60,7 @@ type ProductPayload = {
     detailUrl?: string;
     shortDescription?: string;
     description?: string;
-  };
+  }[];
   [Types.Delete]: {
     id: number;
   };
@@ -76,9 +76,9 @@ export const productReducer = (
 ) => {
   switch (action.type) {
     case Types.Read:
-      return {
+      return [
         ...state,
-        products: action.payload,
+        ...action.payload,
         // {
         //   id: action.payload.id,
         //   name: action.payload.name,
@@ -89,7 +89,7 @@ export const productReducer = (
         //   description: action.payload.description,
         //   shortTitle: action.payload.shortTitle,
         // },
-      };
+      ];
     case Types.Delete:
       return [...state.filter((product) => product.id !== action.payload.id)];
     default:

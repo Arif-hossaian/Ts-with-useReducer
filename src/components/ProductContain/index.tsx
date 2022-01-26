@@ -73,36 +73,42 @@ const ProductContain = () => {
   const {
     state: { products },
   } = useContext(ContextCart);
-  console.log(products);
+  console.log(products, Array.isArray(products));
 
   return (
-    <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-      {products.map((product) => (
-        <div key={product.id} className="group relative">
-          <div className="w-full min-h-90 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-            <img
-              src={product.url}
-              alt=""
-              className="w-full h-full object-center object-cover lg:w-full lg:h-full"
-            />
-          </div>
-
-          <div className="mt-4 flex justify-between">
-            <div>
-              <h3 className="text-sm text-gray-700 dark:text-white">
-                <a href={product.name}>
-                  <span aria-hidden="true" className="absolute inset-0" />
-                  {product.name}
-                </a>
-              </h3>
+    <div className="mt-3 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+      {products ? (
+        products.map((product) => (
+          <div key={product.id} className="group relative">
+            <div className="w-full min-h-90 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+              <img
+                src={product.url}
+                alt=""
+                className="w-full h-full object-center object-cover lg:w-full lg:h-full"
+              />
             </div>
-            <p className="text-sm font-medium text-gray-900 dark:text-white">
-              {product.price}
-            </p>
+
+            <div className="mt-4 flex justify-between">
+              <div>
+                <h3 className="text-sm text-gray-700 dark:text-white">
+                  <a href={product.name}>
+                    <span aria-hidden="true" className="absolute inset-0" />
+                    {product.name}
+                  </a>
+                </h3>
+              </div>
+              <p className="text-sm font-medium text-gray-900 dark:text-white">
+                {product.price}
+              </p>
+            </div>
+            <div>{product.description?.slice(0, 20)}.....</div>
           </div>
-          <div>{product.description}</div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <p className="mt-auto flex justify-center items-center text-red-400">
+          loading...
+        </p>
+      )}
     </div>
   );
 };
