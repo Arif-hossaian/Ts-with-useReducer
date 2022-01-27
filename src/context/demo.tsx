@@ -10,6 +10,6 @@ export const products = [...Array(20)].map(() => ({
   ratings: faker.random.arrayElement([1, 2, 3, 4, 5]),
 }));
 
-// console.log('====================================');
-// console.log(products);
-// console.log('====================================');
+console.log('====================================');
+console.log(products);
+console.log('====================================');

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Slider from 'rc-slider';
 import Tooltip from 'rc-tooltip';
 import Checkbox from './Checkbox';
+import Rating from './Rating/Rating';
 
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
@@ -61,6 +62,7 @@ const productsTypes = [
 
 const ProductFilter = () => {
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [rate, setRate] = useState(3);
   return (
     <form className="products-filter">
       <button
@@ -93,23 +95,15 @@ const ProductFilter = () => {
           </div>
         </div>
 
-        {/* <div className="products-filter__block">
-          <button type="button">Price</button>
+        <div className="products-filter__block">
+          <button type="button">Rating of Products</button>
           <div className="products-filter__block__content">
-            <Range
-              min={0}
-              max={20}
-              defaultValue={[3, 10]}
-              tipFormatter={(value) => `${value}%`}
-            />
+            <Rating rate={rate} setRate={setRate} />
           </div>
-        </div> */}
+        </div>
 
-        <button
-          type="submit"
-          className="btn btn-submit btn--rounded btn--yellow"
-        >
-          Apply
+        <button className="mt-1 w-full bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg">
+          Clear Filter
         </button>
       </div>
     </form>

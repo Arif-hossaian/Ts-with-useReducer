@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { ContextCart } from '../../context/Context';
+import { Types } from '../../context/reducer/Reducer';
+import Rating from '../ProductFilter/Rating/Rating';
 
 const ProductContain = () => {
   const productList = [
@@ -71,37 +73,48 @@ const ProductContain = () => {
     },
   ];
   const {
-    state: { products },
+    state: { products}, dispatch
   } = useContext(ContextCart);
   console.log(products, Array.isArray(products));
 
   return (
-    <div className="mt-3 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+    <div className="mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-6">
       {products ? (
         products.map((product) => (
           <div key={product.id} className="group relative">
             <div className="w-full min-h-90 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
               <img
-                src={product.url}
-                alt=""
-                className="w-full h-full object-center object-cover lg:w-full lg:h-full"
+                src={product.image}
+                alt={product.image}
+                className="w-full h-full object-center object-cover"
               />
             </div>
 
             <div className="mt-4 flex justify-between">
               <div>
                 <h3 className="text-sm text-gray-700 dark:text-white">
-                  <a href={product.name}>
-                    <span aria-hidden="true" className="absolute inset-0" />
-                    {product.name}
-                  </a>
+                  <span aria-hidden="true" className="absolute inset-0" />
+                  {product.name}
                 </h3>
               </div>
-              <p className="text-sm font-medium text-gray-900 dark:text-white">
+              <p className="text-sm font-medium text-green-700">
                 {product.price}
               </p>
             </div>
-            <div>{product.description?.slice(0, 20)}.....</div>
+            <div className='flex justify-between'>
+            <p className=" mt-1 text-sm font-light text-red-700">
+              Stock Available:- {product.inStock}
+            </p>
+            <p className=" mt-1 text-sm font-light text-red-700">
+              <Rating rate={product.ratings}/>
+            </p>
+            </div>
+            
+            <button
+              className="m-1 my-4 w-full bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg"
+            >
+              Buy now
+            </button>
           </div>
         ))
       ) : (

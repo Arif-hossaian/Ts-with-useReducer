@@ -28,7 +28,7 @@ type ActionMap<M extends { [index: string]: any }> = {
     : {
         type: Key;
         payload: M[Key];
-      };
+      }
 };
 
 export enum Types {
@@ -41,28 +41,26 @@ export enum Types {
 
 type ProductType = {
   id: number;
+  fastDelivery?: boolean;
+  image?: string;
+  inStock?: number;
   name?: string;
-  shortTitle?: string;
   price?: number;
-  url?: string;
-  detailUrl?: string;
-  shortDescription?: string;
-  description?: string;
+  ratings?: number;
 };
 
 type ProductPayload = {
   [Types.Read]: {
     id: number;
+    fastDelivery?: boolean;
+    image?: string;
+    inStock?: number;
     name?: string;
-    shortTitle?: string;
     price?: number;
-    url?: string;
-    detailUrl?: string;
-    shortDescription?: string;
-    description?: string;
+    ratings?: number;
   }[];
   [Types.Delete]: {
-    id: number;
+    id?: number;
   };
 };
 
@@ -71,8 +69,8 @@ export type ProductActions =
 
 export const productReducer = (
   state: ProductType[],
-  //action: ProductActions | ShoppingCartActions
-  action: ProductActions
+  action: ProductActions | ShoppingCartActions
+  //action: ProductActions
 ) => {
   switch (action.type) {
     case Types.Read:
@@ -99,21 +97,22 @@ export const productReducer = (
 
 // ShoppingCart
 
-// type ShoppingCartPayload = {
-//   [Types.Add]: undefined;
-// };
+type ShoppingCartPayload = {
+  [Types.Add]: undefined;
+};
 
-// export type ShoppingCartActions =
-//   ActionMap<ShoppingCartPayload>[keyof ActionMap<ShoppingCartPayload>];
+export type ShoppingCartActions =
+  ActionMap<ShoppingCartPayload>[keyof ActionMap<ShoppingCartPayload>];
 
-// export const shoppingCartReducer = (
-//   state: number,
-//   action: ProductActions | ShoppingCartActions
-// ) => {
-//   switch (action.type) {
-//     case Types.Add:
-//       return state + 1;
-//     default:
-//       return state;
-//   }
-// };
+export const shoppingCartReducer = (
+  state: number,
+  action: ProductActions | ShoppingCartActions
+) => {
+  switch (action.type) {
+    case Types.Add:
+      return state + 1;
+    default:
+      return state;
+  }
+};
+

@@ -1336,7 +1336,7 @@ h5 {
       height: calc(100% - 101px);
       flex-shrink: 0;
       position: fixed;
-      z-index: 99;
+      z-index: 1;
       padding: 20px 20px;
       background-color: #fff;
       transition: all 0.4s ease;
@@ -1368,7 +1368,7 @@ h5 {
       left: 0;
       right: 0;
       padding: 8px 16px;
-      z-index: 100;
+      z-index: 1;
       font-size: 12px;
       background-color: #fff;
       border-bottom: 1px solid #e6e6e6;
@@ -1459,7 +1459,7 @@ h5 {
         top: 150%;
         right: 0;
         display: none;
-        z-index: 50;
+        z-index: 10;
         border: 1px solid #e5e5e5;
         background-color: #fff;
         &.products-order-open {
